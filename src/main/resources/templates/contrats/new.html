@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Nouveau contrat</h1>
+      <form
+        th:action="@{/contrats/save}"
+        th:object="${contrat}"
+        method="POST"
+      >
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Nom du contracteur</label>
+            <input
+              th:field="*{name}"
+              type="text"
+              class="form-control"
+              placeholder="Nom du contracteur ou association"
+              required
+            />
+          </div>
+          
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Adresse</label>
+            <input
+              type="text"
+              class="form-control"
+              th:field="*{address}"
+              placeholder="Adresse"
+              required
+            />
+          </div>
+
+          
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="exemple@optimgov.com"
+              th:field="*{email}"
+            />
+          </div>
+
+          <div class="col-sm-2">
+            <label class="form-label">Numéro de téléphone</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Numéro de téléphone"
+              th:field="*{phone}"
+            />
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-3">
+            <label class="form-label">Type de contrat</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Type de contrat accepter"
+              th:field="*{occupation}"
+            />
+          </div>
+          <div class="col-sm-3">
+            <label class="form-label">Commission</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Commission à retenir"
+              th:field="*{salary}"
+            />
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-2">
+            <label class="form-label">Début de contrat</label>
+            <input
+              class="form-control"
+              type="date"
+              th:field="*{contractStart}"
+            />
+          </div>
+
+          <div class="col-sm-2">
+            <label class="form-label">Fin de contrat</label>
+            <input class="form-control" type="date" th:field="*{contractEnd}" />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Details</label>
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="6"
+              th:field="*{obs}"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-auto">
+            <button class="btn btn-primary" type="submit">
+              sauver un contrat
+            </button>
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-danger" th:href="@{/contrats/all}">Annuler</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

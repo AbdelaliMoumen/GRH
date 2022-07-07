@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Soumissions</h1>
+
+      <a th:href="@{/soumissions/new}" class="btn btn-primary btn-sm mb-3">
+        ajouter un soumission
+      </a>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>récepteur de la facture</th>
+            <th>Type de facture</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="soumission : ${soumissions}">
+            <td class="fs-6" th:text="${soumission.name}"></td>
+            <td class="fs-6" th:text="${soumission.occupation}"></td>
+            <td class="fs-6" th:text="${soumission.email}"></td>
+            <td class="fs-6" th:text="${soumission.phone}"></td>
+            <td>
+              <a
+                th:href="@{/soumissions/details/{id}(id=${soumission.id})}"
+                class="btn btn-success btn-sm"
+                >Voir</a
+              >
+              <a
+                th:href="@{/soumissions/edit/{id}(id=${soumission.id})}"
+                class="btn btn-primary btn-sm"
+                >Mettre à jour</a
+              >
+              <a
+                th:href="@{/soumissions/delete/{id}(id=${soumission.id})}"
+                class="btn btn-danger btn-sm"
+                >Supprimer</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

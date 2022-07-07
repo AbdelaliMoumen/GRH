@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Détails de l'employé</h1>
+
+      <div class="row my-2">
+        <div class="col-auto">
+          <a
+          th:href="@{/employees/edit/{id}(id=${employee.id})}"
+          class="btn btn-primary btn-sm"
+          >mettre à jour les données</a>
+        </div>
+        <div class="col-auto">
+          <button 
+          type="button" 
+          class="btn btn-primary btn-sm" 
+          data-bs-toggle="modal" 
+          data-bs-target="#vacationModal" 
+         >prendre des vacances</button>
+        </div>
+        <div class="col-auto">
+          <button 
+          type="button" 
+          class="btn btn-primary btn-sm" 
+          data-bs-toggle="modal" 
+          data-bs-target="#paimentModal" 
+         >ajouter un paiment</button>
+        </div>
+        <div class="col-auto">
+          <button 
+          type="button" 
+          class="btn btn-warning btn-sm" 
+          data-bs-toggle="modal" 
+          data-bs-target="#absenseModal" 
+         >absence</button>
+        </div>       
+       
+        <div class="col-auto">
+          <a
+          th:href="@{/employees/delete/{id}(id=${employee.id})}"
+          class="btn btn-danger btn-sm"
+          >supprimer un employé</a>
+        </div>
+      </div>
+
+      <table class="table">
+        <tbody>
+          <tr th:each="employee : ${employees}">
+            <tr>
+              <th>Nom</th>
+              <td class="fs-6" th:text="${employee.name}"></td>
+            </tr>
+            <tr>
+              <th>Profession</th>
+              <td class="fs-6" th:text="${employee.occupation}"></td>
+            </tr>
+            <tr>
+              <th>Salaire</th>
+              <td class="fs-6" th:text="${employee.salary}"></td>
+            </tr>
+            <tr>
+              <th>Début de contrat</th>
+              <td class="fs-6" th:text="${employee.contractStart}"></td>
+            </tr>
+            <tr>
+              <th>Fin de contrat</th>
+              <td class="fs-6" th:text="${employee.contractEnd}"></td>
+            </tr>
+            <tr>
+              <th>numéro d'identification</th>
+              <td class="fs-6" th:text="${employee.cin}"></td>
+            </tr>
+            <tr>
+              <th>Date de naissance</th>
+              <td class="fs-6" th:text="${employee.birth}"></td>
+            </tr>
+            <tr>
+              <th>Adresse</th>
+              <td class="fs-6" th:text="${employee.address}"></td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td class="fs-6" th:text="${employee.email}"></td>
+            </tr>
+            <tr>
+              <th>Téléphone</th>
+              <td class="fs-6" th:text="${employee.phone}"></td>
+            </tr>
+            
+            <tr>
+            <th>Observation</th>
+            <td class="fs-6" th:text="${employee.obs}"></td>
+          </tr>
+          
+          <tr th:each="department : ${employee.department}">
+          <th>Departement</th>
+              <td class="fs-6" th:text="${department.nom}"></td>
+          
+          </tr>
+          </tr>          
+          
+          
+        
+        
+        </tbody>
+      </table>
+
+      <div class="accordion" id="accordion-details">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              vacance (<span th:text="${employee.vacations.size}"></span>)
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+              <table class="table">
+                <th>depuis</th>
+                <th>jusqu'à</th>
+                <tbody>
+                  <tr th:each="vacation : ${employee.vacations}">
+                    <td th:text="${vacation.start}"></td>
+                    <td th:text="${vacation.end}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header text-bold" id="panelsStayOpen-headingTwo">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+              absence (<span th:text="${employee.absenses.size}"></span>)
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+            <div class="accordion-body">
+              <table class="table">
+                <th>Date d'absence</th>
+                <th>Justifié ou non ?</th>
+                <th>type de justification</th>
+                <tbody>
+                  <tr th:each="absense : ${employee.absenses}">
+                    <td th:text="${absense.date}"></td>
+                    <td th:text="${absense.just}"></td>
+                    <td th:text="${absense.obs}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
+              paiment (<span th:text="${employee.paiments.size}"></span>)
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+            <div class="accordion-body">
+              <table class="table">
+                <th>Mois</th>
+                <th>Date de paiment</th>
+                <th>montant de paiment</th>
+                <tbody>
+                  <tr th:each="paiment : ${employee.paiments}">                  
+                    <td th:text="${paiment.name}"></td>
+                    <td th:text="${paiment.date}"></td>
+                    <td th:text="${paiment.salary}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="vacationModal" tabindex="-1" aria-labelledby="vacationModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="vacationModal">donner des vacances à l'employé</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+  
+            <form
+            th:action="@{/vacations/save/{employee_id}(employee_id=${employee.id})}"
+            th:object="${vacation}"
+            method="POST">
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Date de début des vacances</label>
+                    <input class="form-control" type="date" th:field="*{start}"/>
+                  </div>
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Date de fin de vacances</label>
+                    <input class="form-control" type="date" th:field="*{end}"/>
+                  </div>
+                </div>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">OK</button>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+      
+      
+
+      <div class="modal fade" id="absenseModal" tabindex="-1" aria-labelledby="absenseModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="absenseModal">Appliquer l'absence à l'employé</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>  
+            <form
+            th:action="@{/absenses/save/{employee_id}(employee_id=${employee.id})}"
+            th:object="${absense}"
+            method="POST">
+                <div class="modal-body">
+                                                   
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">date d'absence</label>
+                    <input class="form-control" type="date" th:field="*{date}"/>
+                  </div>
+                  
+                   <div class="mb-3">
+                    <label>Justifié? : </label>
+                    <input type="radio" th:field="*{just}" value="Oui" /> Oui
+                    <input type="radio" th:field="*{just}" value="Non" /> Non<br/>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="obs" class="col-form-label">justification</label>
+                    <input class="form-control" type="text" th:field="*{obs}"/>
+                  </div>
+                </div> 
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">OK</button>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="modal fade" id="paimentModal" tabindex="-1" aria-labelledby="paimentModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="paimentModal">Payer votre employé</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+  
+            <form
+            th:action="@{/paiments/save/{employee_id}(employee_id=${employee.id})}"
+            th:object="${paiment}"
+            method="POST">
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Mois de paiment</label>
+                    <input th:field="*{name}" type="text" class="form-control" placeholder="Nom de mois" required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Date de paiment</label>
+                    <input class="form-control" type="date" th:field="*{date}"/>
+                  </div>
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Montant payé</label>
+                    <input th:field="*{salary}" type="text" class="form-control" placeholder="salaire" required />
+                  </div>
+                </div>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">OK</button>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>

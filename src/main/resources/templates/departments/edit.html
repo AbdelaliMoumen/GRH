@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Mettre à jour les données des departements</h1>
+      <form
+        th:action="@{/departments/save}"
+        th:object="${department}"
+        method="POST"
+      >
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Nom de departement</label>
+            <input
+              th:field="*{nom}"
+              type="text"
+              class="form-control"
+              placeholder="Nom departement"
+              required
+            />
+          </div>
+          
+        </div>
+
+            
+        <div class="row g-3 mb-3">
+          
+          <div class="col-sm-4">
+            <label class="form-label">Competance</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Competance nécaissaire"
+              th:field="*{skills}"
+            />
+          </div>
+          
+        </div>
+        
+        <div class="row mb-3">
+          <div class="form-group">
+            <label class="form-label">Details de departement</label>
+            <textarea
+              class="form-control"              
+              rows="6"
+              type="text"
+              placeholder="description"
+              th:field="*{obs}"
+            ></textarea>
+          </div>
+        </div>
+
+        
+
+        <div class="row mb-3">
+          <div class="col-auto">
+            <button class="btn btn-primary" type="submit">
+              sauver la departement
+            </button>
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-danger" th:href="@{/}">Annuler</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

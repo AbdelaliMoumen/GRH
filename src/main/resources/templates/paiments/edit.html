@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Mettre à jour les données des departements</h1>
+      <form
+        th:action="@{/mpaiments/save}"
+        th:object="${mpaiment}"
+        method="POST"
+      >
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Mois de paiment</label>
+            <input
+              th:field="*{nom}"
+              type="text"
+              class="form-control"
+              placeholder="Nom departement"
+              required
+            />
+          </div>
+          
+        </div>
+
+            
+        <div class="row g-3 mb-3">
+          
+          <div class="col-sm-4">
+            <label class="form-label">Date</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Competance nécaissaire"
+              th:field="*{date}"
+            />
+          </div>
+          
+        </div>
+        
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Montant de paiment</label>
+            <input
+              th:field="*{montant}"
+              type="text"
+              class="form-control"
+              placeholder="montant de paiment"
+              required
+            />
+          </div>
+          
+        </div>
+
+        
+
+        <div class="row mb-3">
+          <div class="col-auto">
+            <button class="btn btn-primary" type="submit">
+              sauver le paiment
+            </button>
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-danger" th:href="@{/}">Annuler</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

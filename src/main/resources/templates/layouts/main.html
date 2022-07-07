@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <link
+      th:rel="stylesheet"
+      th:href="@{/assets/css/bootstrap/css/bootstrap.min.css} "
+    />
+    <link th:rel="stylesheet" th:href="@{/assets/css/styles.css} " />
+    <link th:rel="stylesheet" th:href="@{/assets/css/styles2.css} "/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+  </head>
+
+  <body>
+
+    <div class="wrapper">
+    
+        
+        <div  class="content">
+          <div layout:fragment="content"></div>
+        </div>
+        
+        <div class="sidebar">        
+        
+           <div class="profile">
+           
+                <img src="/assets/pictures/ressources-humaines-a-quoi-ca-sert.png" alt="profile_picture">
+                <h3>Gestion des RH</h3>
+                <p>by MOUMEN Abdelali  & SGHIR Mohamed Amin</p>
+            </div>
+            <ul
+              class="
+                nav nav-pills
+                flex-column
+                
+              "
+            >                
+                <li>
+                    <a href="/" class="">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/employees/all">
+                        <span class="icon"><i class="fas fa-user-workers"></i></span>
+                        <span class="item">Employés</span>
+                    </a>
+                </li>               
+                <li>
+                    <a href="/candidates/all">
+                        <span class="icon"><i class="fas fa-recruits"></i></span>
+                        <span class="item">candidats</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/departments/all">
+                        <span class="icon"><i class="fas fa-depart"></i></span>
+                        <span class="item">departments</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/contrats/all">
+                        <span class="icon"><i class="fas fa-contra"></i></span>
+                        <span class="item">contrats</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/soumissions/all">
+                        <span class="icon"><i class="fas fa-soumis"></i></span>
+                        <span class="item">soumissions</span>
+                    </a>
+                </li>               
+                
+            </ul>
+            
+             <div class="logbut">
+        <a id="logout" href="/logout" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+             </div>
+      
+            
+        </div>
+        
+        </div>
+
+    
+
+    <script th:src="@{/assets/js/jquery/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/assets/js/bootstrap/bootstrap.min.js}"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-3 box">
+          <span th:text="${departments.size}"></span> Depratements
+        </div>      
+        <div class="col-sm-3 box">
+          <span th:text="${employees.size}"></span> Employés
+        </div>
+        <div class="col-sm-3 box">
+          <span th:text="${candidates.size}"></span> Candidats
+        </div>
+        <div class="col-sm-3 box">
+          <span th:text="${contrats.size}"></span> Contrats
+        </div>
+         <div class="col-sm-3 box">
+          <span th:text="${soumissions.size}"></span> Soumissions
+        </div>        
+      </div>
+    </div>
+  </body>
+</html>

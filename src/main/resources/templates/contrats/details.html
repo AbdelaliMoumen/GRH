@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Détails du contrat</h1>
+
+      <div class="row my-2">
+        <div class="col-auto">
+          <a
+          th:href="@{/contrats/edit/{id}(id=${contrat.id})}"
+          class="btn btn-primary btn-sm"
+          >mettre à jour les données</a>
+        </div>
+        
+        <div class="col-auto">
+          <button 
+          type="button" 
+          class="btn btn-primary btn-sm" 
+          data-bs-toggle="modal" 
+          data-bs-target="#cpaimentModal" 
+         >ajouter un paiment</button>
+        </div>
+        
+        <div class="col-auto">
+          <a
+          th:href="@{/contrats/delete/{id}(id=${contrat.id})}"
+          class="btn btn-danger btn-sm"
+          >supprimer un contrat</a>
+        </div>
+      </div>
+
+      <table class="table">
+        <tbody>
+          <tr th:each="contrat : ${contrats}">
+            <tr>
+              <th>Nom du contracteur</th>
+              <td class="fs-6" th:text="${contrat.name}"></td>
+            </tr>
+            <tr>
+              <th>Type de contrat</th>
+              <td class="fs-6" th:text="${contrat.occupation}"></td>
+            </tr>
+            <tr>
+              <th>Commission</th>
+              <td class="fs-6" th:text="${contrat.salary}"></td>
+            </tr>
+            <tr>
+              <th>Début de contrat</th>
+              <td class="fs-6" th:text="${contrat.contractStart}"></td>
+            </tr>
+            <tr>
+              <th>Fin de contrat</th>
+              <td class="fs-6" th:text="${contrat.contractEnd}"></td>
+            </tr>
+           
+           
+            <tr>
+              <th>Adresse</th>
+              <td class="fs-6" th:text="${contrat.address}"></td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td class="fs-6" th:text="${contrat.email}"></td>
+            </tr>
+            <tr>
+              <th>Téléphone</th>
+              <td class="fs-6" th:text="${contrat.phone}"></td>
+            </tr>
+            <tr>
+            <th>Detail du contrat</th>
+            <td class="fs-6" th:text="${contrat.obs}"></td>
+          </tr>
+          </tr>
+          
+ 
+        </tbody>
+      </table>
+
+      <div class="accordion" id="accordion-details">               
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              paiment (<span th:text="${contrat.cpaiments.size}"></span>)
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+              <table class="table">
+                <th>Mois</th>
+                <th>Date de paiment</th>
+                <th>montant de paiment</th>
+                <tbody>
+                  <tr th:each="cpaiment : ${contrat.cpaiments}">                  
+                    <td th:text="${cpaiment.name}"></td>
+                    <td th:text="${cpaiment.date}"></td>
+                    <td th:text="${cpaiment.salary}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>     
+           
+      <div class="modal fade" id="cpaimentModal" tabindex="-1" aria-labelledby="cpaimentModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="cpaimentModal">Commission payé</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+  
+            <form
+            th:action="@{/cpaiments/save/{contrat_id}(contrat_id=${contrat.id})}"
+            th:object="${cpaiment}"
+            method="POST">
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Mois de paiment</label>
+                    <input th:field="*{name}" type="text" class="form-control" placeholder="Nom de mois" required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Date de paiment</label>
+                    <input class="form-control" type="date" th:field="*{date}"/>
+                  </div>
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Montant de paiment</label>
+                    <input th:field="*{salary}" type="text" class="form-control" placeholder="commission" required />
+                  </div>
+                </div>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">OK</button>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>

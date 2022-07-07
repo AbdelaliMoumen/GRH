@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>paiments</h1>
+
+      <a th:href="@{/mpaiments/new}" class="btn btn-primary btn-sm mb-3">
+        ajouter un paiment
+      </a>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Mois de paiment</th>
+            
+            <th>Date de transfert</th> 
+            
+            <th>Montant</th>      
+            
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="mpaiment : ${mpaiments}">
+            <td class="fs-6" th:text="${mpaiment.nom}"></td>
+            
+            <td class="fs-6" th:text="${mpaiment.date}"></td>
+            
+            <td class="fs-6" th:text="${mpaiment.montant}"></td>            
+            
+            <td>
+              <a
+                th:href="@{/mpaiments/details/{id}(id=${mpaiment.id})}"
+                class="btn btn-success btn-sm"
+                >Voir</a
+              >
+              <a
+                th:href="@{/mpaiments/edit/{id}(id=${mpaiment.id})}"
+                class="btn btn-primary btn-sm"
+                >Mettre à jour</a
+              >
+              <a
+                th:href="@{/mpaiments/delete/{id}(id=${mpaiment.id})}"
+                class="btn btn-danger btn-sm"
+                >Supprimer</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Departments</h1>
+
+      <a th:href="@{/departments/new}" class="btn btn-primary btn-sm mb-3">
+        ajouter un departement
+      </a>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>nom de departement</th>
+            
+            <th>skill nécessaires</th>
+            
+            <th>Nombre d'employés</th>
+            
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="department : ${departments}">
+            <td class="fs-6" th:text="${department.nom}"></td>
+            
+            <td class="fs-6" th:text="${department.skills}"></td>
+            
+            <td class="fs-6" th:text="${department.employees.size}"></td>
+            
+            <td>
+              <a
+                th:href="@{/departments/details/{id}(id=${department.id})}"
+                class="btn btn-success btn-sm"
+                >Voir</a
+              >
+              <a
+                th:href="@{/departments/edit/{id}(id=${department.id})}"
+                class="btn btn-primary btn-sm"
+                >Mettre à jour</a
+              >
+              <a
+                th:href="@{/departments/delete/{id}(id=${department.id})}"
+                class="btn btn-danger btn-sm"
+                >Supprimer</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

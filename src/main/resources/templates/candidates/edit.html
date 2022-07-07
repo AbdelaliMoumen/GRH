@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Mettre à jour les données des candidats</h1>
+      <form
+        th:action="@{/candidates/save}"
+        th:object="${candidate}"
+        method="POST"
+      >
+        <div class="row g-3 mb-3">
+          <input type="hidden" th:field="*{id}" />
+          <div class="col-sm-4">
+            <label class="form-label">Nom</label>
+            <input
+              th:field="*{name}"
+              type="text"
+              class="form-control"
+              placeholder="Nom complet"
+              required
+            />
+          </div>
+          <div class="col-sm-4">
+            <label class="form-label">numéro d'identification</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="numéro d'identification"
+              th:field="*{cin}"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Adresse</label>
+            <input
+              type="text"
+              class="form-control"
+              th:field="*{address}"
+              placeholder="Adresse"
+              required
+            />
+          </div>
+
+          <div class="col-sm-2">
+            <label class="form-label">Date de naissance</label>
+            <input
+              class="form-control"
+              type="date"
+              th:field="*{birth}"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="exemple@optimgov.com"
+              th:field="*{email}"
+            />
+          </div>
+
+          <div class="col-sm-2">
+            <label class="form-label">Numéro de téléphone</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Numéro de téléphone"
+              th:field="*{phone}"
+            />
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Domaine technique</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Domaine technique"
+              th:field="*{technicalArea}"
+            />
+          </div>
+          <div class="col-sm-2">
+            <label class="form-label">Note (1-10)</label>
+            <input
+              type="number"
+              class="form-control"
+              th:field="*{rating}"
+              min="0"
+              max="10"
+              value="0"
+            />
+          </div>
+
+          <div class="col-sm-2">
+            <label class="form-label">date de l'entretien</label>
+            <input
+              type="date"
+              class="form-control"
+              th:field="*{jobInterviewDate}"
+            />
+          </div>
+          <div class="row mb-3">
+          <div class="form-group">
+            <label class="form-label">Observation</label>
+            <textarea
+              class="form-control"              
+              rows="6"
+              type="text"
+              placeholder="description"
+              th:field="*{obs}"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-auto">
+            <button class="btn btn-primary" type="submit">
+              enregistrer le candidat
+            </button>
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-danger" th:href="@{/candidates/all}">Annuler</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Détails de soumission</h1>
+
+      <div class="row my-2">
+        <div class="col-auto">
+          <a
+          th:href="@{/soumissions/edit/{id}(id=${soumission.id})}"
+          class="btn btn-primary btn-sm"
+          >mettre à jour les données</a>
+        </div>
+        
+        <div class="col-auto">
+          <button 
+          type="button" 
+          class="btn btn-primary btn-sm" 
+          data-bs-toggle="modal" 
+          data-bs-target="#outsideModal" 
+         >ajouter un paiment</button>
+        </div>
+        
+        <div class="col-auto">
+          <a
+          th:href="@{/soumissions/delete/{id}(id=${soumission.id})}"
+          class="btn btn-danger btn-sm"
+          >supprimer un soumission</a>
+        </div>
+      </div>
+
+      <table class="table">
+        <tbody>
+          <tr th:each="soumission : ${soumissions}">
+            <tr>
+              <th>Nom du récepteur</th>
+              <td class="fs-6" th:text="${soumission.name}"></td>
+            </tr>
+            <tr>
+              <th>Type de facture</th>
+              <td class="fs-6" th:text="${soumission.occupation}"></td>
+            </tr>
+            <tr>
+              <th>Commission général</th>
+              <td class="fs-6" th:text="${soumission.salary}"></td>
+            </tr>
+            <tr>
+              <th>AVG de Commission</th>
+              <td class="fs-6" th:text="${#aggregates.avg(soumission.outsides.![nbr])}"></td>
+            </tr>
+            <tr>
+              <th>date de délivrance</th>
+              <td class="fs-6" th:text="${soumission.dat}"></td>
+            </tr>
+           
+           
+            <tr>
+              <th>Adresse</th>
+              <td class="fs-6" th:text="${soumission.address}"></td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td class="fs-6" th:text="${soumission.email}"></td>
+            </tr>
+            <tr>
+              <th>Téléphone</th>
+              <td class="fs-6" th:text="${soumission.phone}"></td>
+            </tr>
+            <tr>
+            <th>Detail de soumission</th>
+            <td class="fs-6" th:text="${soumission.obs}"></td>
+          </tr>          
+          </tr>
+          
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="accordion" id="accordion-details">               
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              paiment (<span th:text="${soumission.outsides.size}"></span>)
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+              <table class="table">
+                <th>Mois</th>
+                <th>Date de paiment</th>
+                <th>montant de paiment</th>
+                <tbody>
+                  <tr th:each="outside : ${soumission.outsides}">                  
+                    <td th:text="${outside.name}"></td>
+                    <td th:text="${outside.date}"></td>
+                    <td th:text="${outside.nbr}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>     
+           
+      <div class="modal fade" id="outsideModal" tabindex="-1" aria-labelledby="outsideModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="outsideModal">facture payé</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+  
+            <form
+            th:action="@{/outsides/save/{soumission_id}(soumission_id=${soumission.id})}"
+            th:object="${outside}"
+            method="POST">
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Mois de paiment</label>
+                    <input th:field="*{name}" type="text" class="form-control" placeholder="Nom de mois" required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Date de paiment</label>
+                    <input class="form-control" type="date" th:field="*{date}"/>
+                  </div>
+                  <div class="mb-3">
+                    <label for="date" class="col-form-label">Montant de paiment</label>
+                    <input th:field="*{nbr}" type="number" class="form-control" placeholder="commission" required />
+                  </div>
+                </div>
+                
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">OK</button>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>

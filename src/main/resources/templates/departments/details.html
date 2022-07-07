@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Détails du departement</h1>
+
+      <div class="row my-2">
+        <div class="col-auto">
+          <a
+          th:href="@{/departments/edit/{id}(id=${department.id})}"
+          class="btn btn-primary btn-sm"
+          >mettre à jour les données</a>
+        </div>
+        <div class="col-auto">
+          <button 
+          type="button" 
+          class="btn btn-primary btn-sm" 
+          data-bs-toggle="modal" 
+          data-bs-target="#employeeModal" 
+         >ajouter un employer</button>
+        </div>
+        
+        <div class="col-auto">
+          <a
+          th:href="@{/departments/delete/{id}(id=${department.id})}"
+          class="btn btn-danger btn-sm"
+          >supprimer un departement</a>
+        </div>
+      </div>
+
+      <table class="table">
+        <tbody>
+          <tr th:each="department : ${departments}">
+            <tr>
+              <th>Nom</th>
+              <td class="fs-6" th:text="${department.nom}"></td>
+            </tr>
+            <tr>
+              <th>Competance</th>
+              <td class="fs-6" th:text="${department.skills}"></td>
+            </tr>
+             <tr>
+            <th>Details</th>
+            <td class="fs-6" th:text="${department.obs}"></td>
+          </tr>
+          
+          </tr>
+         
+        
+        </tbody>
+      </table>
+
+      <div class="accordion" id="accordion-details">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              employé (<span th:text="${department.employees.size}"></span>)
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+              <table class="table">
+                <th>Nom employé</th>
+                <tbody>
+                  <tr th:each="employee : ${department.employees}">
+                    <td th:text="${employee.name}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+      <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="employeeModal">ajouter un employé</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+  
+            <form
+            th:action="@{/employees/save/{department_id}(department_id=${department.id})}"
+            th:object="${employee}"
+            method="POST">
+                <div class="modal-body">
+                  
+                  <div class="col" th:object="${employee}">
+                       <select class="form-control" id="id" name="employee">
+                       <option value="">Employee List</option>
+                       <option th:each="employee : ${employees}"
+                           th:value="${employee.id}"
+                           th:text="${employee.name}"></option>
+                       </select>
+                       
+                </div>
+                </div>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">OK</button>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+
+      
+    </div>
+    
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  lang="pt"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/main}"
+>
+  <body>
+    <div layout:fragment="content">
+      <h1>Nouveau paiment</h1>
+      <form
+        th:action="@{/mpaiments/save}"
+        th:object="${mpaiment}"
+        method="POST"
+      >
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Mois</label>
+            <input
+              th:field="*{nom}"
+              type="text"
+              class="form-control"
+              placeholder="Mois de paiment"
+              required
+            />
+          </div>
+          
+        </div>
+        
+        <div class="row g-3 mb-3">
+          <div class="col-sm-3">
+            <label class="form-label">Date</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="date de paiment"
+              th:field="*{date}"
+            />
+          </div>
+        </div>
+
+        
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Montant de paiment</label>
+            <input
+              th:field="*{montant}"
+              type="text"
+              class="form-control"
+              placeholder="montant de paiment"
+              required
+            />
+          </div>
+          
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-auto">
+            <button class="btn btn-primary" type="submit">
+              sauver une departement
+            </button>
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-danger" th:href="@{/mpaiments/all}">Annuler</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
