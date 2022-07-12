@@ -18,7 +18,7 @@
         <input type="hidden" th:field="*{id}" />
         <div class="row g-3 mb-3">
           <div class="col-sm-4">
-            <label class="form-label">Nom</label>
+            <label class="form-label">Nom d'employé</label>
             <input
               th:field="*{name}"
               type="text"
@@ -60,11 +60,31 @@
               required
             />
           </div>
-        </div>
+          <div class="col-sm-2">
+            <label class="form-label">Pays de naissance</label>
+            <input
+              type="text"
+              class="form-control"
+              th:field="*{countr}"
+              placeholder="country"
+            />
+          </div>
+
+          <div class="col-sm-2">
+            <label class="form-label">Ville de naissance</label>
+            <input
+              type="text"
+              class="form-control"
+              th:field="*{ville}"
+              placeholder="Ville"
+            />
+          </div>
+        
+        
 
         <div class="row g-3 mb-3">
           <div class="col-sm-4">
-            <label class="form-label">Email address</label>
+            <label class="form-label">Adresse électronique</label>
             <input
               type="email"
               class="form-control"
@@ -74,7 +94,7 @@
           </div>
 
           <div class="col-sm-2">
-            <label class="form-label">Numéro de téléphone</label>
+            <label class="form-label">Num. tél. portable</label>
             <input
               type="text"
               class="form-control"
@@ -82,21 +102,90 @@
               th:field="*{phone}"
             />
           </div>
+          <div class="col-sm-2">
+            <label class="form-label">Num. tél. fixe</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Numéro de téléphone"
+              th:field="*{fixe}"
+            />
+          </div>
+          <div class="col-sm-2">
+            <label class="form-label">Distance du lieu de travail	</label>
+            <input
+              type="text"
+              class="form-control"
+              th:field="*{distance}"
+              placeholder="Distance domicile-lieu de travail"
+            />
+        </div>
+        
+        <div class="row g-3 mb-3">
+          <div class="col-sm-4">
+            <label class="form-label">Heures de travail</label>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+              type="text"
+
+              th:field="*{hdt}">
+
+
+  <option value="44 heures par semaine.">44 heures par semaine.</option>
+  <option value="40 heures par semaine.">40 heures par semaine.</option>
+  <option value="38 heures par semaine.">38 heures par semaine.</option>
+  <option value="35 heures par semaine.">35 heures par semaine.</option>
+</select>
+            
+          </div>
+
+          <div class="col-sm-3">
+            <label class="form-label">Langues</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="entrer les langues"
+              th:field="*{langue}"
+            />
+          </div>
+          
+        </div>
+        
+         <div class="row g-3 mb-3">          
+
+          <div class="col-sm-1">
+          <label class="form-label">Marié ?</label>
+            <div class="form-check">
+            
+  <input type="radio" class="form-check-input" id="radio1" name="optradio" th:field="*{martial}" value="Marié" checked>Oui
+  <label class="form-check-label" for="radio1"></label>
+
+</div>
+<div class="form-check">
+  <input type="radio" class="form-check-input" id="radio2" name="optradio" th:field="*{martial}" value="Non marié">Non
+  <label class="form-check-label" for="radio2" th:field="*{martial}"></label>
+</div>
+            
+          </div>
+          <div class="col-sm-3">
+            <label class="form-label">Nombre d'enfants</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Combien d'enfants ?"
+              th:field="*{enfant}"
+            />
+          </div>
         </div>
 
         <div class="row g-3 mb-3">
-          <div class="col-sm-2">
-            <label class="form-label">Début de contrat</label>
+          <div class="col-sm-3">
+            <label class="form-label">numero de sécurité sociale</label>
             <input
+              type="text"
               class="form-control"
-              type="date"
-              th:field="*{contractStart}"
+              placeholder="nss"
+              th:field="*{nss}"
             />
-          </div>
-
-          <div class="col-sm-2">
-            <label class="form-label">Fin de contrat</label>
-            <input class="form-control" type="date" th:field="*{contractEnd}" />
           </div>
 
           <div class="col-sm-4">
@@ -108,7 +197,7 @@
               th:field="*{occupation}"
             />
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <label class="form-label">Salaire</label>
             <input
               type="text"
@@ -117,6 +206,63 @@
               th:field="*{salary}"
             />
           </div>
+          
+        </div>
+        
+        <div class="row g-3 mb-3">
+          <div class="col-sm-3">
+            <label class="form-label">Numero de Visa</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="num. de Visa"
+              th:field="*{visa}"
+            />
+          </div>
+
+          <div class="col-sm-3">
+            <label class="form-label">Numero de permis de travail</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="num. de permis de travail"
+              th:field="*{travail}"
+            />
+          </div>
+          
+        </div>
+        
+        <div class="row g-3 mb-3">
+        
+        <div class="col-sm-3">
+            <label class="form-label">Date d'expiration de Visa</label>
+            <input
+              class="form-control"
+              type="date"
+              th:field="*{dvisa}"
+            />
+          </div>
+
+          <div class="col-sm-3">
+            <label class="form-label">Date d'expiration de permis de travail</label>
+            <input class="form-control" type="date" th:field="*{dtravail}" />
+          </div>
+          
+          <div class="col-sm-2">
+            <label class="form-label">Début de contrat de trav.</label>
+            <input
+              class="form-control"
+              type="date"
+              th:field="*{contractStart}"
+            />
+          </div>
+
+          <div class="col-sm-2">
+            <label class="form-label">Fin de contrat de travail</label>
+            <input class="form-control" type="date" th:field="*{contractEnd}" />
+          </div>
+
+          
           <div class="row mb-3">
           <div class="form-group">
             <label class="form-label">Observation</label>

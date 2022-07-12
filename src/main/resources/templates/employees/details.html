@@ -6,41 +6,39 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{layouts/main}"
 >
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
   <body>
     <div layout:fragment="content">
       <h1>Détails de l'employé</h1>
+      
+            <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vacationModal">
+  prendre des vacances
+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paimentModal">
+  ajouter un paiment
+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#absenseModal">
+  absence
+</button>
 
-      <div class="row my-2">
+      <div class="row my-4">
         <div class="col-auto">
           <a
           th:href="@{/employees/edit/{id}(id=${employee.id})}"
           class="btn btn-primary btn-sm"
           >mettre à jour les données</a>
         </div>
-        <div class="col-auto">
-          <button 
-          type="button" 
-          class="btn btn-primary btn-sm" 
-          data-bs-toggle="modal" 
-          data-bs-target="#vacationModal" 
-         >prendre des vacances</button>
-        </div>
-        <div class="col-auto">
-          <button 
-          type="button" 
-          class="btn btn-primary btn-sm" 
-          data-bs-toggle="modal" 
-          data-bs-target="#paimentModal" 
-         >ajouter un paiment</button>
-        </div>
-        <div class="col-auto">
-          <button 
-          type="button" 
-          class="btn btn-warning btn-sm" 
-          data-bs-toggle="modal" 
-          data-bs-target="#absenseModal" 
-         >absence</button>
-        </div>       
+        
        
         <div class="col-auto">
           <a
@@ -49,74 +47,188 @@
           >supprimer un employé</a>
         </div>
       </div>
+      
+      <div class="row my-4">
+      <h2></h2>
+           <h2 class="display-2" align="center" th:text="${employee.name}"></h2>
+      </div>
 
       <table class="table">
         <tbody>
           <tr th:each="employee : ${employees}">
+          
+          
+            
             <tr>
-              <th>Nom</th>
-              <td class="fs-6" th:text="${employee.name}"></td>
-            </tr>
-            <tr>
-              <th>Profession</th>
-              <td class="fs-6" th:text="${employee.occupation}"></td>
-            </tr>
-            <tr>
-              <th>Salaire</th>
-              <td class="fs-6" th:text="${employee.salary}"></td>
-            </tr>
-            <tr>
-              <th>Début de contrat</th>
-              <td class="fs-6" th:text="${employee.contractStart}"></td>
-            </tr>
-            <tr>
-              <th>Fin de contrat</th>
-              <td class="fs-6" th:text="${employee.contractEnd}"></td>
-            </tr>
-            <tr>
-              <th>numéro d'identification</th>
-              <td class="fs-6" th:text="${employee.cin}"></td>
-            </tr>
-            <tr>
-              <th>Date de naissance</th>
-              <td class="fs-6" th:text="${employee.birth}"></td>
-            </tr>
-            <tr>
-              <th>Adresse</th>
-              <td class="fs-6" th:text="${employee.address}"></td>
-            </tr>
-            <tr>
-              <th>Email</th>
-              <td class="fs-6" th:text="${employee.email}"></td>
-            </tr>
-            <tr>
-              <th>Téléphone</th>
-              <td class="fs-6" th:text="${employee.phone}"></td>
+            <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading" align="center" >Tél. portable professionnel</div>
+        <div class="fs-3" align="center" th:text="${employee.phone}"></div>
+      </div>
+    </div>
             </tr>
             
             <tr>
-            <th>Observation</th>
-            <td class="fs-6" th:text="${employee.obs}"></td>
-          </tr>
-          
-          <tr th:each="department : ${employee.department}">
-          <th>Departement</th>
-              <td class="fs-6" th:text="${department.nom}"></td>
-          
-          </tr>
-          </tr>          
-          
-          
-        
+            <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading" align="center" >Téléphone professionnel</div>
+        <div class="fs-3" align="center" th:text="${employee.fixe}"></div>
+      </div>
+    </div>
+
+            </tr>
+            
+            <tr>
+            <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading" align="center" >Adresse électronique professionnelle</div>
+        <div class="fs-3" align="center" th:text="${employee.email}"></div>
+      </div>
+    </div>
+            </tr>          
+
+          </tr>    
         
         </tbody>
       </table>
+      
+      <div class="container">
+  <h2>Informations professionnels/personnelles</h2>
+  
+  <div>
+  <h2></h2>
+  </div>
+  
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#infopro">Informations professionnels</a></li>
+    <li><a data-toggle="tab" href="#infoperso">Informations personnelles</a></li>
+  </ul>
+   
+
+  <div class="tab-content">
+    <div id="infopro" class="tab-pane fade in active">
+      <h3> </h3>
+      <table class="table table-bordered">
+      
+            <tr>
+              <th>Tél. portable professionnel</th>
+              <td class="fs-4" th:text="${employee.phone}"></td>
+            </tr>
+         
+            <tr>
+              <th>Tél. fixe professionnel</th>
+              <td class="fs-4" th:text="${employee.fixe}"></td>
+            </tr>
+            <tr>
+              <th>Mail professionnel</th>
+              <td class="fs-4" th:text="${employee.email}"></td>
+            </tr>
+            
+            <tr>
+              <th>Profession</th>
+              <td class="fs-4" th:text="${employee.occupation}"></td>
+            </tr>
+            
+            <tr>
+              <th>Heures de travail</th>
+              <td class="fs-4" th:text="${employee.hdt}"></td>
+            </tr>
+            <tr>
+              <th>Langue</th>
+              <td class="fs-4" th:text="${employee.langue}"></td>
+            </tr>
+            <tr>
+              <th>Debut du contrat de travail</th>
+              <td class="fs-4" th:text="${employee.contractStart}"></td>
+            </tr>
+            <tr>
+              <th>Fin du contrat de travail</th>
+              <td class="fs-4" th:text="${employee.contractEnd}"></td>
+            </tr>
+      </table>
+   
+    </div>
+    
+    
+    <div id="infoperso" class="tab-pane fade">
+      <h3></h3>
+      <table class="table table-bordered">
+      <tr>
+              <th>Date de naissance</th>
+              <td class="fs-4" th:text="${employee.birth}"></td>
+            </tr>
+            <tr>
+              <th>Pays de naissance</th>
+              <td class="fs-4" th:text="${employee.countr}"></td>
+            </tr>
+            <tr>
+              <th>Ville de naissance</th>
+              <td class="fs-4" th:text="${employee.ville}"></td>
+            </tr>
+            <tr>
+              <th>Adresse</th>
+              <td class="fs-4" th:text="${employee.address}"></td>
+            </tr>
+            <tr>
+              <th>Statut martial</th>
+              <td class="fs-4" th:text="${employee.martial}"></td>
+            </tr>
+            <tr>
+              <th>Genre</th>
+              <td class="fs-4" th:text="${employee.sexe}"></td>
+            </tr>
+            <tr>
+              <th>numero de carte nationale</th>
+              <td class="fs-4" th:text="${employee.cin}"></td>
+            </tr>
+            <tr>
+              <th>numero de sécurité sociale</th>
+              <td class="fs-4" th:text="${employee.nss}"></td>
+            </tr>
+            
+            <tr>
+              <th>Salaire</th>
+              <td class="fs-4" th:text="${employee.salary}"></td>
+            </tr>
+         
+            <tr>
+              <th>Distance domicile-lieu de travail</th>
+              <td class="fs-4" th:text="${employee.distance} + KM"></td>
+            </tr>
+            <tr>
+              <th>Nombre d'enfants</th>
+              <td class="fs-4" th:text="${employee.enfant}"></td>
+            </tr>
+            <tr>
+              <th>Numero de Visa</th>
+              <td class="fs-4" th:text="${employee.visa}"></td>
+            </tr>
+            <tr>
+              <th>Date d'expiration de Visa</th>
+              <td class="fs-4" th:text="${employee.dvisa}"></td>
+            </tr>
+            <tr>
+              <th>Numero de permis de travail</th>
+              <td class="fs-4" th:text="${employee.travail}"></td>
+            </tr>
+            <tr>
+              <th>Date d'expiration de permis de travail</th>
+              <td class="fs-4" th:text="${employee.dtravail}"></td>
+            </tr>
+      </table>
+    
+    </div>
+   </div> 
+</div>
+
+
+
 
       <div class="accordion" id="accordion-details">
         <div class="accordion-item">
           <h2 class="accordion-header" id="panelsStayOpen-headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-              vacance (<span th:text="${employee.vacations.size}"></span>)
+              <h5>vacance (<span th:text="${employee.vacations.size}"></span>)</h5>
             </button>
           </h2>
           <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
@@ -139,7 +251,7 @@
         <div class="accordion-item">
           <h2 class="accordion-header text-bold" id="panelsStayOpen-headingTwo">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-              absence (<span th:text="${employee.absenses.size}"></span>)
+              <h5>absence (<span th:text="${employee.absenses.size}"></span>)</h5>
             </button>
           </h2>
           <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
@@ -165,7 +277,7 @@
         <div class="accordion-item">
           <h2 class="accordion-header" id="panelsStayOpen-headingThree">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
-              paiment (<span th:text="${employee.paiments.size}"></span>)
+              <h5>paiment (<span th:text="${employee.paiments.size}"></span>)</h5>
             </button>
           </h2>
           <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
@@ -186,14 +298,21 @@
           </div>
         </div>
       </div>
+      
+      
+      
+
+      
 
 
       <div class="modal fade" id="vacationModal" tabindex="-1" aria-labelledby="vacationModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="vacationModal">donner des vacances à l'employé</h5>
+              <h5 class="modal-title" id="vacationModal">Donner des vacances à l'employé</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </button>
             </div>
   
             <form

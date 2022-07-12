@@ -7,7 +7,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.web.multipart.MultipartFile;
+//import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,6 +30,47 @@ public class Employee {
 
     @Column
     private String phone;
+    
+    //
+    
+    @Column
+    private String fixe;
+    
+    @Column
+    private String countr;
+    
+    @Column
+    private String ville;
+    
+    @Column
+    private String martial;
+    
+    @Column
+    private String sexe;
+    
+    @Column
+    private String nss;
+    
+    @Column
+    private String langue;
+    
+    @Column
+    private String distance;
+    
+    @Column
+    private String enfant;
+    
+    @Column
+    private String visa;
+    
+    @Column
+    private String travail;
+    
+    @Column
+    private String dvisa;
+    
+    @Column
+    private String dtravail;
 
     @Column
     private String email;
@@ -54,6 +95,9 @@ public class Employee {
 
     @Column
     private String salary;
+    
+    @Column
+    private String hdt;
 
     @Column
     private String obs;
@@ -138,6 +182,121 @@ public class Employee {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    //
+    
+    public String getFixe() {
+        return this.fixe;
+    }
+
+    public void setFixe(String fixe) {
+        this.fixe = fixe;
+    }
+    
+    public String getHdt() {
+        return this.hdt;
+    }
+
+    public void setHdt(String hdt) {
+        this.hdt = hdt;
+    }
+    
+    public String getCountr() {
+        return this.countr;
+    }
+
+    public void setCountr(String countr) {
+        this.countr = countr;
+    }
+    
+    public String getVille() {
+        return this.ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+    
+    public String getMartial() {
+        return this.martial;
+    }
+
+    public void setMartial(String martial) {
+        this.martial = martial;
+    }
+    
+    public String getSexe() {
+        return this.sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+    
+    public String getNss() {
+        return this.nss;
+    }
+
+    public void setNss(String nss) {
+        this.nss = nss;
+    }
+    
+    public String getLangue() {
+        return this.langue;
+    }
+
+    public void setLangue(String langue) {
+        this.langue = langue;
+    }
+    
+    public String getDistance() {
+        return this.distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+    
+    public String getEnfant() {
+        return this.enfant;
+    }
+
+    public void setEnfant(String enfant) {
+        this.enfant = enfant;
+    }
+    
+    public String getVisa() {
+        return this.visa;
+    }
+
+    public void setVisa(String visa) {
+        this.visa = visa;
+    }
+    
+    public String getTravail() {
+        return this.travail;
+    }
+
+    public void setTravail(String travail) {
+        this.travail = travail;
+    }
+    
+    public String getDvisa() {
+        return this.dvisa;
+    }
+
+    public void setDvisa(String dvisa) {
+        this.dvisa = dvisa;
+    }
+    
+    public String getDtravail() {
+        return this.dtravail;
+    }
+
+    public void setDtravail(String dtravail) {
+        this.dtravail = dtravail;
+    }
+    
+    //
 
     public String getEmail() {
         return this.email;

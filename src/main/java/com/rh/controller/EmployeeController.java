@@ -13,14 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-
-
 import javax.servlet.ServletContext;
-
-import java.io.File;
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/employees")
